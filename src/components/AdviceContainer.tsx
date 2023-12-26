@@ -4,6 +4,7 @@ import getRandomAdvice from "../services/advices";
 
 function AdviceContainer() {
   const [advice, setAdvice] = useState({ id: 0, advice: "" });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     const fetchRandomAdvice = async () => {
@@ -14,8 +15,14 @@ function AdviceContainer() {
   }, []);
 
   const handleClick = async () => {
+    setIsButtonDisabled(true);
     const { slip } = await getRandomAdvice();
     setAdvice(slip);
+
+    // Api has 2 second cache that returns the same advice
+    setTimeout(async () => {
+      setIsButtonDisabled(false);
+    }, 2000);
   };
 
   return (
@@ -31,9 +38,11 @@ function AdviceContainer() {
       <button
         type="button"
         onClick={handleClick}
-        className="
+        disabled={isButtonDisabled}
+        className={`
         absolute -bottom-8 left-1/2 flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-userNeonGreen
-        hover:shadow-[0px_0px_47px_-3px_rgba(178,255,181,1)]"
+        hover:shadow-[0px_0px_47px_-3px_rgba(178,255,181,1)]
+        ${isButtonDisabled && "opacity-50"}`}
       >
         <img src={diceImg} alt="" />
       </button>
