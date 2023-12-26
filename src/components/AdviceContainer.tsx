@@ -28,7 +28,7 @@ function AdviceContainer() {
   return (
     <div
       className="
-      relative mt-40 w-full max-w-xl rounded-lg bg-userDarkGrayishBlue px-6 pb-16 pt-10 text-center text-userLightCyan md:mt-0"
+      relative mt-40 w-full max-w-xl rounded-2xl bg-userDarkGrayishBlue px-6 pb-16 pt-10 text-center text-userLightCyan md:mt-0"
     >
       <p className="text-xs tracking-[0.2em] text-userNeonGreen">
         ADVICE #{advice.id}
